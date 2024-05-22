@@ -6,24 +6,25 @@ import { useNavigate } from "react-router-dom";
 import { getMe } from "../features/authSlice";
 
 const AddProduct = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { isError } = useSelector((state) => state.auth);
+  const dispatch = useDispatch(); // Mendapatkan fungsi dispatch dari hook useDispatch
+  const navigate = useNavigate(); // Mendapatkan fungsi navigate dari hook useNavigate
+  const { isError } = useSelector((state) => state.auth); // Mengambil nilai isError dari state auth menggunakan useSelector
 
   useEffect(() => {
-    dispatch(getMe());
-  }, [dispatch]);
+    dispatch(getMe()); // Memanggil aksi getMe saat komponen pertama kali dirender
+  }, [dispatch]); // Efek ini akan dijalankan kembali jika dispatch berubah
 
   useEffect(() => {
     if (isError) {
-      navigate("/");
+      navigate("/"); // Navigasi ke halaman beranda jika terjadi kesalahan
     }
-  }, [isError, navigate]);
+  }, [isError, navigate]); // Efek ini akan dijalankan kembali jika isError atau navigate berubah
+
   return (
     <Layout>
-      <FormAddProduct />
+      <FormAddProduct /> {/* Menampilkan komponen FormAddProduct di dalam Layout */}
     </Layout>
   );
 };
 
-export default AddProduct;
+export default AddProduct; // Mengekspor komponen AddProduct sebagai default

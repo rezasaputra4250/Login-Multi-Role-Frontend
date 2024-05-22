@@ -1,32 +1,33 @@
-import React, { useEffect } from "react";
-import Layout from "./Layout";
-import FormEditUser from "../components/FormEditUser";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { getMe } from "../features/authSlice";
+import React, { useEffect } from "react"; // Mengimpor React dan hook useEffect
+import Layout dari "./Layout"; // Mengimpor komponen Layout
+import FormEditUser dari "../components/FormEditUser"; // Mengimpor komponen FormEditUser
+import { useDispatch, useSelector } dari "react-redux"; // Mengimpor hook useDispatch dan useSelector dari react-redux
+import { useNavigate } dari "react-router-dom"; // Mengimpor hook useNavigate dari react-router-dom
+import { getMe } dari "../features/authSlice"; // Mengimpor aksi getMe dari authSlice
 
 const EditUser = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { isError, user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch(); // Mendapatkan fungsi dispatch dari hook useDispatch
+  const navigate = useNavigate(); // Mendapatkan fungsi navigate dari hook useNavigate
+  const { isError, user } = useSelector((state) => state.auth); // Mengambil nilai isError dan user dari state auth menggunakan useSelector
 
   useEffect(() => {
-    dispatch(getMe());
-  }, [dispatch]);
+    dispatch(getMe()); // Memanggil aksi getMe saat komponen pertama kali dirender
+  }, [dispatch]); // Efek ini akan dijalankan kembali jika dispatch berubah
 
   useEffect(() => {
     if (isError) {
-      navigate("/");
+      navigate("/"); // Navigasi ke halaman beranda jika terjadi kesalahan
     }
     if (user && user.role !== "admin") {
-      navigate("/dashboard");
+      navigate("/dashboard"); // Navigasi ke halaman dashboard jika pengguna bukan admin
     }
-  }, [isError, user, navigate]);
+  }, [isError, user, navigate]); // Efek ini akan dijalankan kembali jika isError, user, atau navigate berubah
+
   return (
     <Layout>
-      <FormEditUser />
+      <FormEditUser /> {/* Menampilkan komponen FormEditUser di dalam Layout */}
     </Layout>
   );
 };
 
-export default EditUser;
+export default EditUser; // Mengekspor komponen EditUser sebagai default
