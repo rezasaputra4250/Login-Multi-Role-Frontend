@@ -18,7 +18,7 @@ const AddUser = () => {
     if (isError) {
       navigate("/"); // Navigasi ke halaman beranda jika terjadi kesalahan
     }
-    if (user && user.role !== "admin") {
+    if (user && user.roleId !== 1) {
       navigate("/dashboard"); // Navigasi ke dashboard jika user tidak memiliki peran admin
     }
   }, [isError, user, navigate]); // Efek ini akan dijalankan kembali jika isError, user, atau navigate berubah

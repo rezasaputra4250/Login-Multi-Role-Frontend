@@ -56,35 +56,61 @@ export const authSlice = createSlice({
         // Menangani state pending untuk aksi LoginUser
         builder.addCase(LoginUser.pending, (state) => {
             state.isLoading = true; // Menetapkan state loading menjadi true
+            console.log('LoginUser pending...'); // Tambahkan console log di sini
         });
         // Menangani state fulfilled untuk aksi LoginUser
         builder.addCase(LoginUser.fulfilled, (state, action) => {
             state.isLoading = false; // Menetapkan state loading menjadi false
             state.isSuccess = true;  // Menetapkan state sukses menjadi true
             state.user = action.payload; // Menyimpan data pengguna
+            console.log('LoginUser fulfilled:', action.payload); // Tambahkan console log di sini
         });
         // Menangani state rejected untuk aksi LoginUser
         builder.addCase(LoginUser.rejected, (state, action) => {
             state.isLoading = false; // Menetapkan state loading menjadi false
             state.isError = true;    // Menetapkan state error menjadi true
             state.message = action.payload; // Menyimpan pesan kesalahan
+            console.error('LoginUser rejected:', action.payload); // Tambahkan console log di sini
         });
 
         // Menangani state pending untuk aksi getMe
         builder.addCase(getMe.pending, (state) => {
             state.isLoading = true; // Menetapkan state loading menjadi true
+            console.log('getMe pending...'); // Tambahkan console log di sini
         });
         // Menangani state fulfilled untuk aksi getMe
         builder.addCase(getMe.fulfilled, (state, action) => {
             state.isLoading = false; // Menetapkan state loading menjadi false
             state.isSuccess = true;  // Menetapkan state sukses menjadi true
             state.user = action.payload; // Menyimpan data pengguna
+            console.log('getMe fulfilled:', action.payload); // Tambahkan console log di sini
         });
         // Menangani state rejected untuk aksi getMe
         builder.addCase(getMe.rejected, (state, action) => {
             state.isLoading = false; // Menetapkan state loading menjadi false
             state.isError = true;    // Menetapkan state error menjadi true
             state.message = action.payload; // Menyimpan pesan kesalahan
+            console.error('getMe rejected:', action.payload); // Tambahkan console log di sini
+        });
+
+        // Menangani state pending untuk aksi LogOut (jika ada)
+        builder.addCase(LogOut.pending, (state) => {
+            state.isLoading = true; // Menetapkan state loading menjadi true
+            console.log('LogOut pending...'); // Tambahkan console log di sini
+        });
+        // Menangani state fulfilled untuk aksi LogOut (jika ada)
+        builder.addCase(LogOut.fulfilled, (state) => {
+            state.isLoading = false; // Menetapkan state loading menjadi false
+            state.isSuccess = true;  // Menetapkan state sukses menjadi true
+            state.user = null; // Menghapus data pengguna setelah logout
+            console.log('LogOut fulfilled'); // Tambahkan console log di sini
+        });
+        // Menangani state rejected untuk aksi LogOut (jika ada)
+        builder.addCase(LogOut.rejected, (state, action) => {
+            state.isLoading = false; // Menetapkan state loading menjadi false
+            state.isError = true;    // Menetapkan state error menjadi true
+            state.message = action.payload; // Menyimpan pesan kesalahan
+            console.error('LogOut rejected:', action.payload); // Tambahkan console log di sini
         });
     }
 });

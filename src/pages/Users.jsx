@@ -21,7 +21,7 @@ const Users = () => {
     if (isError) {
       navigate("/");
     }
-    if (user && user.role !== "admin") {
+    if (user && user.roleId !== 1) {
       navigate("/dashboard");
     }
   }, [isError, user, navigate]);

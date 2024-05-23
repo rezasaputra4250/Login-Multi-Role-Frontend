@@ -1,55 +1,54 @@
-import React from "react"; // Mengimpor React
-import { NavLink, useNavigate } from "react-router-dom"; // Mengimpor NavLink dan useNavigate dari 'react-router-dom'
-import { IoPerson, IoPricetag, IoHome, IoLogOut } from "react-icons/io5"; // Mengimpor ikon dari react-icons
-import { useDispatch, useSelector } from "react-redux"; // Mengimpor useDispatch dan useSelector dari 'react-redux'
-import { LogOut, reset } from "../features/authSlice"; // Mengimpor aksi LogOut dan reset dari authSlice
+import React from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { IoPerson, IoPricetag, IoHome, IoLogOut } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import { LogOut, reset } from "../features/authSlice";
 
 const Sidebar = () => {
-  const dispatch = useDispatch(); // Mendapatkan fungsi dispatch dari redux
-  const navigate = useNavigate(); // Mendapatkan fungsi navigate dari react-router-dom
-  const { user } = useSelector((state) => state.auth); // Mendapatkan informasi pengguna dari state
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
 
-  // Fungsi untuk logout pengguna
   const logout = () => {
-    dispatch(LogOut()); // Memanggil aksi LogOut untuk logout pengguna
-    dispatch(reset()); // Memanggil aksi reset untuk mengembalikan state ke nilai awal
-    navigate("/"); // Mengarahkan pengguna ke halaman login setelah logout
+    dispatch(LogOut());
+    dispatch(reset());
+    navigate("/");
   };
 
   return (
     <div>
-      <aside className="menu pl-2 has-shadow"> {/* Sidebar */}
-        <p className="menu-label">General</p> {/* Label menu */}
-        <ul className="menu-list"> {/* Daftar menu */}
+      <aside className="menu pl-2 has-shadow">
+        <p className="menu-label">General</p>
+        <ul className="menu-list">
           <li>
-            <NavLink to={"/dashboard"}> {/* Link menuju halaman Dashboard */}
-              <IoHome /> Dashboard {/* Ikon dan teks menu */}
+            <NavLink to={"/dashboard"}>
+              <IoHome /> Dashboard
             </NavLink>
           </li>
           <li>
-            <NavLink to={"/products"}> {/* Link menuju halaman Products */}
-              <IoPricetag /> Products {/* Ikon dan teks menu */}
+            <NavLink to={"/products"}>
+              <IoPricetag /> Products
             </NavLink>
           </li>
         </ul>
-        {user && user.role === "admin" && ( {/* Menampilkan menu admin hanya jika pengguna memiliki peran admin */}
+        {user && user.roleId === 1 && (
           <div>
-            <p className="menu-label">Admin</p> {/* Label menu */}
-            <ul className="menu-list"> {/* Daftar menu */}
+            <p className="menu-label">Admin</p>
+            <ul className="menu-list">
               <li>
-                <NavLink to={"/users"}> {/* Link menuju halaman Users */}
-                  <IoPerson /> Users {/* Ikon dan teks menu */}
+                <NavLink to={"/users"}>
+                  <IoPerson /> Users
                 </NavLink>
               </li>
             </ul>
           </div>
         )}
 
-        <p className="menu-label">Settings</p> {/* Label menu */}
-        <ul className="menu-list"> {/* Daftar menu */}
+        <p className="menu-label">Settings</p>
+        <ul className="menu-list">
           <li>
-            <button onClick={logout} className="button is-white"> {/* Tombol logout */}
-              <IoLogOut /> Logout {/* Ikon dan teks tombol */}
+            <button onClick={logout} className="button is-white">
+              <IoLogOut /> Logout
             </button>
           </li>
         </ul>
@@ -58,4 +57,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar; // Ekspor komponen Sidebar agar dapat digunakan di tempat lain dalam aplikasi
+export default Sidebar;

@@ -9,6 +9,9 @@ import EditUser from "./pages/EditUser";
 import AddProduct from "./pages/AddProduct";
 import EditProduct from "./pages/EditProduct";
 
+import axios from 'axios';
+axios.defaults.withCredentials = true
+
 function App() {
   return (
     <div className="App">
